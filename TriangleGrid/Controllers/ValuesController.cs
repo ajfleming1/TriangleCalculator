@@ -1,45 +1,56 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using TriangleGrid.Models;
 
 namespace TriangleGrid.Controllers
 {
-  [Route("api/[controller]")]
+  [Route("api/[controller]/[action]")]
   [ApiController]
   public class ValuesController : ControllerBase
   {
-    // GET api/values
+    private TriangleContext _context;
+
+    public ValuesController()
+    {
+      if (_context == null || !_context.Triangles.Any())
+      {
+        _context = SeedData.SetUpTriangles();
+      }
+    }
+
     [HttpGet]
-    public ActionResult<IEnumerable<string>> Get()
+    public ActionResult<IEnumerable<Triangle>> AllTriangles()
     {
-      return new string[] { "value1", "value2" };
+      return _context.Triangles;
     }
 
-    // GET api/values/5
-    [HttpGet("{id}")]
-    public ActionResult<string> Get(int id)
+
+    [HttpGet]
+    public ActionResult<Triangle> GetByLabel(string label)
     {
-      return "value";
+      var triangle = _context.Triangles.FirstOrDefault(t => t.Label == label);
+      if (triangle == null)
+      {
+        throw new InvalidOperationException($"Triangle '{label}' not found.");
+      }
+
+      return triangle;
     }
 
-    // POST api/values
-    [HttpPost]
-    public void Post([FromBody] string value)
+    [HttpGet]
+    public ActionResult<string> GetByCoordinates(int aX, int aY, int bX, int bY, int cX, int cY)
     {
-    }
+      var triangle = _context.Triangles.FirstOrDefault(t => t.CartesianAx == aX && t.CartesianAy == aY &&
+                                                            t.CartesianBx == bX && t.CartesianBy == bY &&
+                                                            t.CartesianCx == cX && t.CartesianCy == cY);
+      if (triangle == null)
+      {
+        throw new InvalidOperationException($"Triangle with points '({aX},{aY})', '({bX},{bY})', '({cX},{cY})' not found.");
+      }
 
-    // PUT api/values/5
-    [HttpPut("{id}")]
-    public void Put(int id, [FromBody] string value)
-    {
-    }
-
-    // DELETE api/values/5
-    [HttpDelete("{id}")]
-    public void Delete(int id)
-    {
+      return triangle.Label;
     }
   }
 }
