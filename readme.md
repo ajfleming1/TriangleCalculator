@@ -1,5 +1,6 @@
 # Triangle Grid Calculator
 This project solves the problems posed in this pdf. 
+
 https://drive.google.com/open?id=1PX4U_6829m6dR_fBjSpygfGNISqMi2ZI
 
 I solved the problems in two ways.
