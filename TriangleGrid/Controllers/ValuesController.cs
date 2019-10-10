@@ -14,7 +14,7 @@ namespace TriangleGrid.Controllers
     private readonly TriangleContext _context;
 
     /// <summary>
-    /// Instances a new instance of <see cref="ValuesController"/>.
+    /// Creates a new instance of <see cref="ValuesController"/>.
     /// </summary>
     public ValuesController()
     {
@@ -72,7 +72,7 @@ namespace TriangleGrid.Controllers
     /// Displays triangle details based on provided points.
     /// </summary>
     /// <param name="aX">The X value for point A.</param>
-    /// <param name="aY">The Y value for point B.</param>
+    /// <param name="aY">The Y value for point A.</param>
     /// <param name="bX">The X value for point B.</param>
     /// <param name="bY">The Y value for point B.</param>
     /// <param name="cX">The X value for point C.</param>
@@ -132,7 +132,7 @@ namespace TriangleGrid.Controllers
     /// Gets a triangle from the context using the provided parameters.
     /// </summary>
     /// <param name="aX">The X value for point A.</param>
-    /// <param name="aY">The Y value for point B.</param>
+    /// <param name="aY">The Y value for point A.</param>
     /// <param name="bX">The X value for point B.</param>
     /// <param name="bY">The Y value for point B.</param>
     /// <param name="cX">The X value for point C.</param>
