@@ -53,11 +53,33 @@ namespace TriangleGrid.Controllers
     [HttpGet]
     public ActionResult<string> GetByInferenceCoordinates(int aX, int aY, int bX, int bY, int cX, int cY)
     {
+      var isUpper = bY == aY && bX == cX;
+      var isLower = bY == cY && bX == aX;
+      if (aX % 10 != 0 || aY % 10 != 0 || bX % 10 != 0 || bY % 10 != 0 || cX % 10 != 0 || cY % 10 != 0)
+      {
+        throw new InvalidOperationException($"Coordinates must be a multiple of 10 '({aX}, {aY})'.");
+      }
+
+      if (!isLower && !isUpper || isUpper && isLower)
+      {
+        throw new InvalidOperationException($"Parameters provided do not produce a triangle in the grid.");
+      }
+
+      if (Math.Max(cY, bY) - Math.Min(aY, bY) != 10)
+      {
+        throw new InvalidOperationException($"Triangle sides must be of length 10.");
+      }
+
+      if (Math.Max(cX, bX) - Math.Min(aX, bX) != 10)
+      {
+        throw new InvalidOperationException($"Triangle sides must be of length 10.");
+      }
+
       return new TriangleByRowColumn
       {
         Row = aY / 10,
         Column = aX / 10,
-        IsUpper = bY == aY && bX == cX
+        IsUpper = isUpper
       }.ToString();
     }
 
