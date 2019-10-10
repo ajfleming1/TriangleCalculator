@@ -31,7 +31,7 @@ Calculate label by coordinates (task 1B)
 
 https://localhost:44384/api/values/GetByInferenceCoordinates?aX=40&aY=30&bX=40&bY=40&cX=50&cY=40
 
-The request examples following are beyond the grid provided.
+The following request examples show how we can go beyond for any row (A-Z) and column.
 
 https://localhost:44384/api/values/GetByInferenceCoordinates?aX=2050&aY=60&bX=2050&bY=70&cX=2060&cY=70
 
