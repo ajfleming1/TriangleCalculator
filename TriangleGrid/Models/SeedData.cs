@@ -4,21 +4,29 @@ namespace TriangleGrid.Models
 {
   public static class SeedData
   {
+    /// <summary>
+    /// Sets up a 6x6 grid of two triangles in each space.
+    /// </summary>
+    /// <returns>List of triangles.</returns>
     public static TriangleContext SetUpTriangles()
     {
       var context = new TriangleContext();
       var triangles = new List<Triangle>();
-      var columns = 6;
-      var rows = 6;
+      const int columns = 6;
+      const int rows = 6;
       var columnIndex = 0;
       while (columnIndex < columns)
       {
         var rowIndex = 0;
         while (rowIndex < rows)
         {
+          // The only difference between a top triangle and a bottom triangle
+          // in the grid space is is the value of the Bx and By coordinates.
           var rowLabel = GetRowName(rowIndex);
           var bottomLabel = rowLabel + (columnIndex * 2 + 1);
           var topLabel = rowLabel + (columnIndex * 2 + 2);
+          
+          // Add the 'bottom' triangle to the grid space.
           triangles.Add(
             new Triangle()
             {
@@ -31,6 +39,7 @@ namespace TriangleGrid.Models
               CartesianCy = (rowIndex + 1) * 10
             });
 
+          // Add the 'top' triangle to the grid space.
           triangles.Add(new Triangle()
           {
             Label = topLabel,
@@ -52,11 +61,15 @@ namespace TriangleGrid.Models
       return context;
     }
 
-    public static string GetRowName(int index)
+    /// <summary>
+    /// Gets a row name for the provided row.
+    /// </summary>
+    /// <param name="row">The row that needs a name.</param>
+    /// <returns>String (char) representing the name of the row.</returns>
+    public static string GetRowName(int row)
     {
       const string letters = "ABCDEF";
-
-      return letters[index % letters.Length].ToString();
+      return letters[row % letters.Length].ToString();
     }
   }
 }
