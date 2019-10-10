@@ -9,6 +9,7 @@ Second way uses math and regular expressions to figure out the row, column, and 
 
 # 1. Sample Requests (using LINQ).
 First way using LINQ entities.
+
 Using LINQ - Get all Triangles 
 
 https://localhost:44384/api/values/AllTriangles
@@ -23,6 +24,7 @@ https://localhost:44384/api/values/GetByCoordinates?aX=30&aY=50&bX=30&bY=60&cX=4
 
 # 2. Sample Requests (not using LINQ).
 Second way using math and a regular expression.
+
 Caclulate coordinates by label (task 1A) 
 
 https://localhost:44384/api/values/GetByLabelInference?label=A2
